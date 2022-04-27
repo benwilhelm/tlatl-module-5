@@ -1,0 +1,22 @@
+{
+  "name": "tlatl-module-5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watchAll"
+  },
+  "author": "Ben Wilhelm <ben.wilhelm@nimblemoose.com>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "babel-jest": "^28.0.2",
+    "jest": "^28.0.2",
+    "jest-cli": "^28.0.2"
+  },
+  "dependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "tmp": "^0.2.1"
+  }
+}
