@@ -1,22 +1,16 @@
 import { User } from './user.model.js';
 import { createUserRouteHandler } from './user.route.js';
-import { suppressErrorOutput, randomizeEmail } from '../util.js';
+import { suppressErrorOutput } from '../util.js';
 
-test('Returns 200 with valid params', async () => {
-  const params = {
-    name: 'Ben',
-    email: randomizeEmail('ben@ben.ben'),
-  };
-  const response = await createUserRouteHandler(params);
-  expect(response).toEqual(200);
-});
+beforeAll(() => User.sync({ force: true }));
+beforeEach(() => User.destroy({ where: {}, truncate: true }));
 
 test('Returns 500 on error', async () => {
   const params = {
     name: 'Ben',
-    email: randomizeEmail('ben@ben.ben'),
+    email: 'ben@ben.ben',
   };
-  jest.spyOn(User, 'create').mockImplementation(() => {
+  jest.spyOn(User, 'create').mockImplementationOnce(() => {
     throw new Error('Fake Error');
   });
 
@@ -24,4 +18,13 @@ test('Returns 500 on error', async () => {
     createUserRouteHandler(params)
   );
   expect(response).toEqual(500);
+});
+
+test('Returns 200 with valid params', async () => {
+  const params = {
+    name: 'Ben',
+    email: 'ben@ben.ben',
+  };
+  const response = await createUserRouteHandler(params);
+  expect(response).toEqual(200);
 });

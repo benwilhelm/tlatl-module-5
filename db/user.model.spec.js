@@ -1,5 +1,7 @@
 import { User } from './user.model.js';
-import { randomizeEmail } from '../util.js';
+
+beforeAll(() => User.sync({ force: true }));
+beforeEach(() => User.destroy({ where: {}, truncate: true }));
 
 test('getByEmailDomain gets all users whose email belongs at domain', async () => {
   await User.bulkCreate([
@@ -20,7 +22,7 @@ test('getByEmailDomain gets all users whose email belongs at domain', async () =
 test('Saves Valid User', async () => {
   const params = {
     name: 'Ben',
-    email: randomizeEmail('ben0@ben.ben'),
+    email: 'ben0@ben.ben',
   };
   const user = await User.create(params);
   expect(user.name).toEqual(params.name);
