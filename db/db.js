@@ -3,8 +3,8 @@ import { Sequelize } from 'sequelize';
 // don't log SQL Statements in test environment, unless DB_LOGGING environment
 // variable is explicitly set
 const logging = getLoggingOption;
-// const dbCnxString = 'sqlite::memory:';
-const dbCnxString = 'sqlite:./.sqlite/test.sqlite';
+const dbCnxString = 'sqlite::memory:';
+// const dbCnxString = 'sqlite:./.sqlite/test.sqlite';
 
 export const db = new Sequelize(dbCnxString, { logging });
 
